@@ -74,3 +74,26 @@ INSERT INTO professor
     VALUES
         ('elaine@email.com'),
         ('andre@email.com');
+
+INSERT INTO areasAtuacao
+    VALUES
+        ('elaine@email.com',
+        'Base de Dados'),
+        ('elaine@email.com',
+        'Ciencia de Dados');
+
+INSERT INTO chef
+    VALUES 
+        ('jacquin@email.com'),
+        ('paola@email.com');
+
+INSERT INTO especialidades
+    VALUES 
+        ('jacquin@email.com',
+        'francesa'),
+        ('paola@email.com',
+        'italiana'),
+        ('paola@email.com',
+        'argentina');
+
+

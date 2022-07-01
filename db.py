@@ -6,40 +6,46 @@ from read_sql import read_sql
 
 def inserir_mestre(email, nome, dataNasc, telefone=None):
 
-    sql = """INSERT INTO mestre(email, nome, data_nasc, telefone)
+    query = """INSERT INTO mestre(email, nome, data_nasc, telefone)
                 VALUES(%s,%s,%s,%s);"""
     conn = None
-    erro = 0
+    sucess = True
     try:
         params = config()
         conn = psycopg2.connect(**params)
         cur = conn.cursor()
-        cur.execute(sql, (email.upper(), nome.upper(), dataNasc, telefone))
+        cur.execute(query, (email, nome, dataNasc, telefone))
         conn.commit()
         cur.close()
     except (Exception, psycopg2.DatabaseError) as error:
         print("ERRO", error)
-        erro = 1
+        sucess = False
     finally:
         if conn is not None:
             conn.close()
-    return erro
+    return sucess
 
-def show_mestres():
-    sql = """TABLE mestre"""
+#def coordenador_atual(classe):
+
+
+# Cadastro da solicitação
+def cadastrar_solicitacao(universitario, classe, solicitacao):
+    query = """INSERT INTO solicitacao(universitario, coordenador, solicitacao) 
+            VALUES(%s, %s, %s);"""
     conn = None
-    erro = 0
+    sucess = True
     try:
         params = config()
         conn = psycopg2.connect(**params)
         cur = conn.cursor()
-        cur.execute(sql, ())
+        cur.execute(query, (universitario, classe, solicitacao))
         conn.commit()
         cur.close()
     except (Exception, psycopg2.DatabaseError) as error:
         print("ERRO", error)
-        erro = 1
+        sucess = False
     finally:
         if conn is not None:
             conn.close()
-    return erro
+    return sucess
+    
