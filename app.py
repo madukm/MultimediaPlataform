@@ -63,7 +63,13 @@ while True:
         # Erro caso não haja um coordenador atualmente da classe
         if db.cadastrar_solicitacao(email_uni, classe, solicitacao):
             print(f"Sua solicitação foi cadastrada!\n")    
-        
-    elif func == 3: # Sair do sistema
+
+    elif func == 3: # Recomendar tutorial
+        pass
+
+    elif func == 4: # Sair do sistema
         print("Saindo... \n")
         break
+    
+    else:
+        print("Função inválida!\n")
