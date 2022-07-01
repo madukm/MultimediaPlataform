@@ -13,5 +13,8 @@ user=[your_user]
 password=[your_password]
 ```
 To create and feed the db, please run the following inside the repository:
+
+```
 psql -U postgres -a -q -f sql/esquema.sql
 psql -U postgres -d multimedia_db -a -q -f sql/dados.sql
+```
