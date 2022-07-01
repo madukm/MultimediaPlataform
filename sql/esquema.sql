@@ -13,6 +13,9 @@ João Victor Sene Araújo - 11796382
 Maria Eduarda Kawakami Moreira - 11218751
 */
 
+-- psql -U postgres -a -q -f sql/esquema.sql
+-- psql -U postgres -d multimedia_db -a -q -f sql/dados.sql 
+
 -- Esquema
 
 -- Deletando a base caso já exista
@@ -46,6 +49,7 @@ CREATE TABLE universitario(
 -- Coordenador
 CREATE TABLE coordenador(
     mestre VARCHAR(50) NOT NULL,
+    CONSTRAINT pk_coordenador PRIMARY KEY(mestre),
     CONSTRAINT fk_coordenador FOREIGN KEY(mestre)
         REFERENCES mestre(email)
         ON DELETE CASCADE
@@ -56,11 +60,13 @@ CREATE TABLE termo(
     coordenador VARCHAR(50) NOT NULL,
     iniVigencia DATE NOT NULL,
     fimVigencia DATE NOT NULL,
-    classe DATE NOT NULL,
+    classe VARCHAR(50) NOT NULL,
     CONSTRAINT pk_termo PRIMARY KEY(coordenador, iniVigencia),
     CONSTRAINT fk_termo FOREIGN KEY(coordenador)
         REFERENCES coordenador(mestre)
-        ON DELETE CASCADE
+        ON DELETE CASCADE,
+    CONSTRAINT check_termo_classe 
+        CHECK(UPPER(classe) IN ('PROFESSOR', 'CHEF', 'FAXINEIRO', 'FARMACEUTICO'))
 );
 
 -- Professor
@@ -103,18 +109,18 @@ CREATE TABLE especialidades(
 
 -- Faxineiro
 CREATE TABLE faxineiro(
-    email VARCHAR(50) NOT NULL,
-    CONSTRAINT pk_faxineiro PRIMARY KEY(email),
-    CONSTRAINT fk_faxineiro FOREIGN KEY(email)
+    mestre VARCHAR(50) NOT NULL,
+    CONSTRAINT pk_faxineiro PRIMARY KEY(mestre),
+    CONSTRAINT fk_faxineiro FOREIGN KEY(mestre)
         REFERENCES mestre(email)
         ON DELETE CASCADE
 );
 
 -- Farmaceutico
 CREATE TABLE farmaceutico(
-    email VARCHAR(50) NOT NULL,
-    CONSTRAINT pk_farmaceutico PRIMARY KEY(email),
-    CONSTRAINT fk_farmaceutico FOREIGN KEY(email)
+    mestre VARCHAR(50) NOT NULL,
+    CONSTRAINT pk_farmaceutico PRIMARY KEY(mestre),
+    CONSTRAINT fk_farmaceutico FOREIGN KEY(mestre)
         REFERENCES mestre(email)
         ON DELETE CASCADE
 );
@@ -318,4 +324,29 @@ CREATE TABLE solicitacao(
         REFERENCES mestre(email)
         ON DELETE SET NULL
 );
--- check email format
+
+-- Check email format
+
+-- Trigger checar período do termo do coordenador
+CREATE FUNCTION check_termo_overlap() RETURNS trigger AS
+$BODY$
+DECLARE
+	d record;
+BEGIN
+	FOR d IN SELECT iniVigencia FROM termo
+	WHERE classe = NEW.classe
+  	LOOP
+	IF (NEW.iniVigencia < d.iniVigencia) THEN 
+			raise exception 'Já existe um coordenador dessa classe!';
+	END IF;
+  	END LOOP;
+	RETURN NEW;
+END
+$BODY$
+LANGUAGE plpgsql;
+
+CREATE TRIGGER termo_overlap
+BEFORE INSERT
+ON termo
+FOR EACH ROW
+EXECUTE PROCEDURE check_termo_overlap();
