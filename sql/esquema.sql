@@ -139,7 +139,7 @@ CREATE TABLE classes(
 
 -- Tutorial
 CREATE TABLE tutorial(
-    id INTEGER NOT NULL CHECK(id > 0),
+    id SERIAL NOT NULL,
     titulo VARCHAR(100) NOT NULL,
     data TIMESTAMP NOT NULL,
     tema VARCHAR(100),
@@ -325,19 +325,18 @@ CREATE TABLE solicitacao(
         ON DELETE SET NULL
 );
 
--- Check email format
-
 -- Trigger checar período do termo do coordenador
 CREATE FUNCTION check_termo_overlap() RETURNS trigger AS
 $BODY$
 DECLARE
 	d record;
 BEGIN
-	FOR d IN SELECT iniVigencia FROM termo
+	FOR d IN SELECT iniVigencia, fimVigencia FROM termo
 	WHERE classe = NEW.classe
   	LOOP
-	IF (NEW.iniVigencia < d.iniVigencia) THEN 
-			raise exception 'Já existe um coordenador dessa classe!';
+	IF ((NEW.iniVigencia >= d.iniVigencia AND NEW.iniVigencia < d.fimVigencia) OR
+        (NEW.fimVigencia > d.iniVigencia AND NEW.fimVigencia <= d.fimVigencia)) THEN 
+			raise exception 'Já existe um coordenador dessa classe coordenando nesse período!';
 	END IF;
   	END LOOP;
 	RETURN NEW;
