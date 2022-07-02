@@ -27,14 +27,16 @@ def print_format_line(elements):
     index = []
 
 print("""
-Bem vindo à plataforma de tutoriais para apoio a universitários!!!
+BEM VINDO(A) à plataforma de tutoriais para apoio a universitários!!!
 """)
 
 while True:
     func = int(input("""Selecione uma funcionalidade:   
-    1- CADASTRAR MESTRE
-    5- SAIR DO SISTEMA
-    """)) 
+    1 - CADASTRAR MESTRE
+    2 - FAZER UMA SOLICITAÇÃO
+    3 - RECOMENDAR UM TUTORIAL A OUTRO UNIVERSITÁRIO
+    4 - SAIR DO SISTEMA
+    """))
     print("\n")
 
 
@@ -44,10 +46,30 @@ while True:
         data_nascimento = input("Informe sua data de nascimento (dd-mm-aaaa):")
         telefone = input("Informe seu telefone:")
 
-        if not db.inserir_mestre(email, nome, data_nascimento, telefone):
+        if db.inserir_mestre(email, nome, data_nascimento, telefone):
             print(f"O mestre {nome} ({email}) foi adicionado ao banco.")
         print('\n')
 
-    elif func == 2: # Sair do sistema
+    elif func == 2:
+        email_uni = input("""Faça seu login para realizar uma solicitação!
+                            Informe seu email: """)
+        # Checar se o email está cadastrado como universitário no bd
+        classe = int(input("""Sua solicitação é destinada a que classe?
+                            1 - Professor
+                            2 - Chef
+                            3 - Faxineiro
+                            4 - Farmacêutico"""))
+        solicitacao = input("""Qual solicitação você deseja enviar? Por favor, escreva em até 200 caracteres.""")
+        # Erro caso não haja um coordenador atualmente da classe
+        if db.cadastrar_solicitacao(email_uni, classe, solicitacao):
+            print(f"Sua solicitação foi cadastrada!\n")    
+
+    elif func == 3: # Recomendar tutorial
+        pass
+
+    elif func == 4: # Sair do sistema
         print("Saindo... \n")
         break
+    
+    else:
+        print("Função inválida!\n")

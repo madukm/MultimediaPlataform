@@ -311,9 +311,13 @@ CREATE TABLE comentario(
 CREATE TABLE solicitacao(
     universitario VARCHAR(50) NOT NULL,
     coordenador VARCHAR(50) NOT NULL,
-    data TIMESTAMP NOT NULL,
+    data TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     mestre VARCHAR(50),
+<<<<<<< HEAD
     texto VARCHAR(200) NOT NULL,
+=======
+    solicitacao VARCHAR(200) NOT NULL,
+>>>>>>> develop
     CONSTRAINT pk_solicitacao PRIMARY KEY(universitario, coordenador, data),
     CONSTRAINT fk_solicitacao_universitario FOREIGN KEY(universitario)
         REFERENCES universitario(email)

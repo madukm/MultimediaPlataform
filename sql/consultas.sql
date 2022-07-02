@@ -3,6 +3,7 @@
 -- coordenador 'X' que era coordenador durante um período de
 -- vigência Y-Z. Ordene por data;
 
+<<<<<<< HEAD
 SELECT S.texto,S.data
     FROM coordenador C
         JOIN termo T
@@ -12,23 +13,51 @@ SELECT S.texto,S.data
 
 -- Listar todos os mestres que possuem os tutoriais com 
 -- nota maior ou igual a 4 (nome e dataNasc);
+=======
+SELECT S.texto,S.data,C.mestre
+	FROM solicitacao S
+		JOIN coordenador C
+		ON S.coordenador = C.mestre
+			JOIN termo T
+			ON C.mestre = T.coordenador
+    WHERE ((T.iniVigencia > '2021-12-16'::date) AND (T.fimVigencia < '2025-01-01'::date))
+    ORDER BY S.data
+;
+
+-- Listar todos os mestres que possuem os tutoriais com 
+-- nota menor ou igual a 3 (nome e dataNasc) de forma
+-- ordenada (pelo nome do mestre);
+>>>>>>> develop
 
 SELECT M.nome,M.data_nasc
     FROM mestre M
         JOIN
         (
             SELECT tutorial,chef as mestre FROM receita
+<<<<<<< HEAD
             LEFT JOIN
             SELECT tutorial,professor FROM videoaula
             LEFT JOIN
             SELECT tutorial,faxineiro FROM tecnicalimpeza
             LEFT JOIN
+=======
+            UNION
+            SELECT tutorial,professor FROM videoaula
+            UNION
+            SELECT tutorial,faxineiro FROM tecnicalimpeza
+            UNION
+>>>>>>> develop
             SELECT tutorial,farmaceutico FROM assistencia
         ) Trs
         ON M.email = Trs.mestre
             JOIN tutorial T
             ON T.id = Trs.tutorial
+<<<<<<< HEAD
         WHERE T.Nota > 4
+=======
+	WHERE T.Nota <= 3
+	ORDER BY (M.nome)
+>>>>>>> develop
 ;
 
 -- Consultar todos os coordenadores que possuem tempo de
