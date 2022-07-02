@@ -313,6 +313,7 @@ CREATE TABLE solicitacao(
     coordenador VARCHAR(50) NOT NULL,
     data TIMESTAMP NOT NULL,
     mestre VARCHAR(50),
+    texto VARCHAR(200) NOT NULL,
     CONSTRAINT pk_solicitacao PRIMARY KEY(universitario, coordenador, data),
     CONSTRAINT fk_solicitacao_universitario FOREIGN KEY(universitario)
         REFERENCES universitario(email)
