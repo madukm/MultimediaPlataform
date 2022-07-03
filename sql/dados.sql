@@ -3,46 +3,46 @@ INSERT INTO mestre
         -- Professores
         'elaine@email.com', -- email (PK)
         'Elaine',  -- nome 
-        '30-03-1980', -- data nascimento
+        DATE '1980-03-29', -- data nascimento
         16981513674), -- telefone
         ('andre@email.com',
         'Andre',
-        '17-09-1994',
+        DATE '1994-09-17',
         16983547289),
         -- Chefs
         ('ciclano@email.com',
         'Ciclano',
-        '09-09-1980',
+        DATE '1980-09-09',
         16980987564),
         ('jacquin@email.com', 
         'Jacquin',   
-        '01-12-1998', 
+        DATE '1998-12-01', 
         12981849378),
         ('paola@email.com',
         'Paola',
-        '02-03-1978',
+        DATE '1978-03-02',
         11987463098),
         -- Faxineiros
         ('sergio@email.com',
         'Sergio',
-        '16-08-1994',
+        DATE '1994-08-16',
         16983547229),
         ('beltrano@email.com', 
         'Beltrano',   
-        '15-06-1990', 
+        DATE '1990-06-15', 
         12981870097),
         ('felipe@email.com',
         'Felipe',
-        '17-09-1990',
+        DATE '1990-09-17',
         16983547299),
         -- Farmaceuticos
         ('adrio@email.com',
         'Adrio',
-        '16-08-1994',
+        DATE '1994-08-16',
         16983547229),
         ('paulo@email.com',
         'Paulo',
-        '16-09-1995',
+        DATE '1995-09-16',
         16983547219)
 ;
 
@@ -51,27 +51,27 @@ INSERT INTO universitario
     (
         'madu@email.com',
         'madu',
-        '19-04-2001',
+        DATE '2001-04-19',
         12976892123
     ),(
         'sene@email.com',
         'sene',
-        '05-08-2001',
+        DATE '2001-08-05',
         11987863098
     ),(
         'franca@email.com',
         'franca',
-        '16-10-2001',
+        DATE '2001-10-16',
         15984756478
     ),(
         'beatriz@email.com',
         'beatriz',
-        '05-12-2001',
+        DATE '2001-12-05',
         19984637485
     ),(
         'fred@email.com',
         'fred',
-        '10-10-2000',
+        DATE '2000-10-10',
         85984536278
     );
 
@@ -85,20 +85,20 @@ INSERT INTO coordenador
 INSERT INTO termo
     VALUES
         ('elaine@email.com',
-        '01-01-2022',
-        '01-01-2024',
+        DATE '2022-01-01',
+        DATE '2024-01-01',
         'PROFESSOR'),
         ('ciclano@email.com',
-        '01-07-2021',
-        '30-06-2023',
+        DATE '2021-07-01',
+        DATE '2023-06-30',
         'CHEF'),
         ('sergio@email.com',
-        '01-06-2023',
-        '01-07-2023',
+        DATE '2023-06-01',
+        DATE '2023-07-01',
         'FAXINEIRO'),
         ('adrio@email.com',
-        '04-06-2022',
-        '04-11-2022',
+        DATE '2022-06-04',
+        DATE '2022-11-04',
         'FARMACEUTICO');
 
 INSERT INTO chef
@@ -146,27 +146,27 @@ INSERT INTO solicitacao
     VALUES
         ('sene@email.com',
         'elaine@email.com',
-        '16-04-2022',
+        DATE '2022-04-16',
         'elaine@email.com',
         'Facilitar o trabalho.'),
         ('franca@email.com',
         'elaine@email.com',
-        '07-05-2022',
+        DATE '2022-05-07',
         'elaine@email.com',
         'Cancelar a materia.'),
         ('madu@email.com',
         'ciclano@email.com',
-        '17-08-2021',
+        DATE '2021-08-17',
         'paola@email.com',
         'Gostaria de ver videos sobre cortes de carne.'),
         ('beatriz@email.com',
         'ciclano@email.com',
-        '01-02-2022',
+        DATE '2022-02-01',
         'jacquin@email.com',
         'Gostaria de uma receita de Petit Gateau.'),
         ('fred@email.com',
         'elaine@email.com',
-        '09-09-2023',
+        DATE '2023-09-09',
         'andre@email.com',
         'Revisao no material postado.');
 
@@ -175,52 +175,52 @@ INSERT INTO tutorial
         -- Receitas
         (DEFAULT,
         'Como fazer um macarrão gostoso',
-        '02-07-2022',
+        DATE '2022-07-02',
         'Comida Italiana',
         'RECEITA',
         0),
         (DEFAULT,
         'Como fazer um crepe',
-        '03-07-2022',
+        DATE '2022-07-03',
         'Comida Francesa',
         'RECEITA',
         5),
         -- Video-Aulas
         (DEFAULT,
         'Como criar uma Tabela em SQL',
-        '04-07-2022',
+        DATE '2022-07-04',
         'Computacao',
         'VIDEOAULA',
         0),
         (DEFAULT,
         'Como criar uma base de dados usando Postgre',
-        '05-07-2022',
+        DATE '2022-07-05',
         'Computacao',
         'VIDEOAULA',
         5),
         -- Tecnica de Limpeza
         (DEFAULT,
         'Como lavar mancha de suco na roupa',
-        '06-07-2022',
+        DATE '2022-07-06',
         'Roupa',
         'TECNICALIMPEZA',
         0),
         (DEFAULT,
         'Como lavar o seu banheiro sem desperdicar agua',
-        '07-07-2022',
+        DATE '2022-07-07',
         'Comodo',
         'TECNICALIMPEZA',
         5),
         -- Assistencia Farmaceutica
         (DEFAULT,
         'O que fazer quando sentir enjoo?',
-        '08-07-2022',
+        DATE '2022-07-08',
         'Saude',
         'TECNICALIMPEZA',
         0),
         (DEFAULT,
         'Quais produtos que ajudam a hidratar a pele?',
-        '09-07-2022',
+        DATE '2022-07-09',
         'Estetica',
         'TECNICALIMPEZA',
         5)
@@ -228,12 +228,12 @@ INSERT INTO tutorial
 
 INSERT INTO receita
     VALUES
-        ((SELECT T.id FROM tutorial T WHERE ( T.titulo = 'Como fazer um macarrão gostoso' AND T.data = '2022-07-02'::date)),
+        ((SELECT T.id FROM tutorial T WHERE ( T.titulo = 'Como fazer um macarrão gostoso' AND T.data = DATE '2022-07-02')),
         2,
         1200,
         'paola@email.com'
         ),
-        ((SELECT T.id FROM tutorial T WHERE ( T.titulo = 'Como fazer um crepe' AND T.data = '2022-07-03'::date)),
+        ((SELECT T.id FROM tutorial T WHERE ( T.titulo = 'Como fazer um crepe' AND T.data = DATE '2022-07-03')),
         1,
         500,
         'jacquin@email.com'
@@ -242,24 +242,24 @@ INSERT INTO receita
 
 INSERT INTO ingredientes
     VALUES
-        ((SELECT T.id FROM tutorial T WHERE ( T.titulo = 'Como fazer um macarrão gostoso' AND T.data = '2022-07-02'::date)),
-        "Macarrao espaguete 500g"),
-        ((SELECT T.id FROM tutorial T WHERE ( T.titulo = 'Como fazer um macarrão gostoso' AND T.data = '2022-07-02'::date)),
-        "Molho de tomate 240g"),
-        ((SELECT T.id FROM tutorial T WHERE ( T.titulo = 'Como fazer um crepe' AND T.data = '2022-07-03'::date)),
-        "Massa de Crepe"),
-        ((SELECT T.id FROM tutorial T WHERE ( T.titulo = 'Como fazer um crepe' AND T.data = '2022-07-03'::date)),
-        "Carne Moida 200g")
+        ((SELECT T.id FROM tutorial T WHERE ( T.titulo = 'Como fazer um macarrão gostoso' AND T.data = DATE '2022-07-02')),
+        'Macarrao espaguete 500g'),
+        ((SELECT T.id FROM tutorial T WHERE ( T.titulo = 'Como fazer um macarrão gostoso' AND T.data = DATE '2022-07-02')),
+        'Molho de tomate 240g'),
+        ((SELECT T.id FROM tutorial T WHERE ( T.titulo = 'Como fazer um crepe' AND T.data = DATE '2022-07-03')),
+        'Massa de Crepe'),
+        ((SELECT T.id FROM tutorial T WHERE ( T.titulo = 'Como fazer um crepe' AND T.data = DATE '2022-07-03')),
+        'Carne Moida 200g')
 ;
 
 INSERT INTO videoaula
     VALUES
-        ((SELECT T.id FROM tutorial T WHERE ( T.titulo = 'Como criar uma Tabela em SQL' AND T.data = '2022-07-04'::date)),
+        ((SELECT T.id FROM tutorial T WHERE ( T.titulo = 'Como criar uma Tabela em SQL' AND T.data = DATE '2022-07-04')),
         'SQL',
         'Banco de Dados',
         'elaine@email.com'
         ),
-        ((SELECT T.id FROM tutorial T WHERE ( T.titulo = 'Como criar uma base de dados usando Postgre' AND T.data = '2022-07-05'::date)),
+        ((SELECT T.id FROM tutorial T WHERE ( T.titulo = 'Como criar uma base de dados usando Postgre' AND T.data = DATE '2022-07-05')),
         'SQL',
         'Banco de Dados',
         'andre@email.com'
@@ -268,80 +268,105 @@ INSERT INTO videoaula
 
 INSERT INTO materiais
     VALUES
-        ((SELECT T.id FROM tutorial T WHERE ( T.titulo = 'Como criar uma base de dados usando Postgre' AND T.data = '2022-07-05'::date)),
+        ((SELECT T.id FROM tutorial T WHERE ( T.titulo = 'Como criar uma base de dados usando Postgre' AND T.data = DATE '2022-07-05')),
         'Computador com Postgre instalado.')
 ;
 
 INSERT INTO tecnicaLimpeza
     VALUES
-        ((SELECT T.id FROM tutorial T WHERE ( T.titulo = 'Como lavar mancha de suco na roupa' AND T.data = '2022-07-06'::date)),
+        ((SELECT T.id FROM tutorial T WHERE ( T.titulo = 'Como lavar mancha de suco na roupa' AND T.data = DATE '2022-07-06')),
         'felipe@email.com'
         ),
-        ((SELECT T.id FROM tutorial T WHERE ( T.titulo = 'Como lavar o seu banheiro sem desperdicar agua' AND T.data = '2022-07-07'::date)),
+        ((SELECT T.id FROM tutorial T WHERE ( T.titulo = 'Como lavar o seu banheiro sem desperdicar agua' AND T.data = DATE '2022-07-07')),
         'sergio@email.com'
         )
 ;
 
 INSERT INTO produtos
     VALUES
-        ((SELECT T.id FROM tutorial T WHERE ( T.titulo = 'Como lavar mancha de suco na roupa' AND T.data = '2022-07-06'::date)),
+        ((SELECT T.id FROM tutorial T WHERE ( T.titulo = 'Como lavar mancha de suco na roupa' AND T.data = DATE '2022-07-06')),
         'Sabao em Po Omo Lavagem Perfeita'
         ),
-        ((SELECT T.id FROM tutorial T WHERE ( T.titulo = 'Como lavar o seu banheiro sem desperdicar agua' AND T.data = '2022-07-07'::date)),
+        ((SELECT T.id FROM tutorial T WHERE ( T.titulo = 'Como lavar o seu banheiro sem desperdicar agua' AND T.data = DATE '2022-07-07')),
         'Limpador Perfumado Veja Lavanda da Franca'
         )
 ;
 
 INSERT INTO assistencia
     VALUES
-        ((SELECT T.id FROM tutorial T WHERE ( T.titulo = 'O que fazer quando sentir enjoo?' AND T.data = '2022-07-08'::date)),
+        ((SELECT T.id FROM tutorial T WHERE ( T.titulo = 'O que fazer quando sentir enjoo?' AND T.data = DATE '2022-07-08')),
         'adrio@email.com'
         ),
-        ((SELECT T.id FROM tutorial T WHERE ( T.titulo = 'Quais produtos que ajudam a hidratar a pele?' AND T.data = '2022-07-09'::date)),
+        ((SELECT T.id FROM tutorial T WHERE ( T.titulo = 'Quais produtos que ajudam a hidratar a pele?' AND T.data = DATE '2022-07-09')),
         'paulo@email.com'
         )
 ;
 
 INSERT INTO remedios
     VALUES
-        ((SELECT T.id FROM tutorial T WHERE ( T.titulo = 'O que fazer quando sentir enjoo?' AND T.data = '2022-07-08'::date)),
+        ((SELECT T.id FROM tutorial T WHERE ( T.titulo = 'O que fazer quando sentir enjoo?' AND T.data = DATE '2022-07-08')),
         'Dramin B6 50mg/10mg'
         ),
-        ((SELECT T.id FROM tutorial T WHERE ( T.titulo = 'Quais produtos que ajudam a hidratar a pele?' AND T.data = '2022-07-09'::date)),
+        ((SELECT T.id FROM tutorial T WHERE ( T.titulo = 'Quais produtos que ajudam a hidratar a pele?' AND T.data = DATE '2022-07-09')),
         'NIVEA Locao Hidratante Milk'
         )
 ;
 
 INSERT INTO comentario
     VALUES 
-        ("madu@email.com", 4, '01/02/2021', 'Exelente tutorial!'),
-        ("fred@email.com", 1, '11/07/2020', 'Otimo video!'),
-        ("sene@email.com", 2, '21/04/2022', 'Gostei')
+        ('madu@email.com',
+         (SELECT T.id FROM tutorial T WHERE ( T.titulo = 'Como fazer um macarrão gostoso' AND T.data = DATE '2022-07-02')),
+         DATE '2022-07-03',
+         'Excelente receita!'),
+        ('fred@email.com', 
+         (SELECT T.id FROM tutorial T WHERE ( T.titulo = 'O que fazer quando sentir enjoo?' AND T.data = DATE '2022-07-08')),
+         DATE '2022-07-11', 
+         'Otimo tutorial!'),
+        ('sene@email.com', 
+         (SELECT T.id FROM tutorial T WHERE ( T.titulo = 'Como lavar mancha de suco na roupa' AND T.data = DATE '2022-07-06')),
+         DATE '2022-07-21',
+         'Gostei')
 ;
 
 INSERT INTO recomendar
     VALUES
-        ("madu@email.com", "franca@email.com", 1),
-        ("madu@email.com", "fred@email.com", 2),
-        ("madu@email.com", "sene@email.com", 2),
-        ("beatriz@email.com", "madu@email.com", 3)
+        ('madu@email.com',
+         'franca@email.com', 
+         (SELECT T.id FROM tutorial T WHERE ( T.titulo = 'Como fazer um macarrão gostoso' AND T.data = DATE '2022-07-02'))),
+        ('madu@email.com',
+         'fred@email.com', 
+         (SELECT T.id FROM tutorial T WHERE ( T.titulo = 'Como fazer um macarrão gostoso' AND T.data = DATE '2022-07-02'))),
+        ('madu@email.com',
+         'sene@email.com', 
+         (SELECT T.id FROM tutorial T WHERE ( T.titulo = 'Como fazer um macarrão gostoso' AND T.data = DATE '2022-07-02'))),
+        ('beatriz@email.com', 
+         'madu@email.com',
+         (SELECT T.id FROM tutorial T WHERE ( T.titulo = 'Como criar uma base de dados usando Postgre' AND T.data = DATE '2022-07-05')))
 ;
 
 INSERT INTO avaliar
     VALUES
-        (4, "madu@email.com", 10),
-        (1, "fred@email.com", 9),
-        (2, "sene@email.com", 7),
-        (3, "sene@email.com", 8)
+        ((SELECT T.id FROM tutorial T WHERE ( T.titulo = 'Como fazer um macarrão gostoso' AND T.data = DATE '2022-07-02')), 
+         'madu@email.com', 
+         5),
+        ((SELECT T.id FROM tutorial T WHERE ( T.titulo = 'Como fazer um macarrão gostoso' AND T.data = DATE '2022-07-02')), 
+         'fred@email.com', 
+         4),
+        ((SELECT T.id FROM tutorial T WHERE ( T.titulo = 'O que fazer quando sentir enjoo?' AND T.data = DATE '2022-07-08')),
+         'fred@email.com', 
+         4),
+        ((SELECT T.id FROM tutorial T WHERE ( T.titulo = 'Como criar uma base de dados usando Postgre' AND T.data = DATE '2022-07-05')),
+         'sene@email.com', 
+         4)
 ;
 
 INSERT INTO seguir
     VALUES
-        ("madu@email.com", "paola@email.com"),
-        ("madu@email.com", "jaquin@email.com"),
-        ("madu@email.com", "ciclano@email.com"),
-        ("sene@email.com", "elaine@email.com"),
-        ("fred@email.com", "adrio@email.com"),
-        ("fred@email.com", "paulo@email.com"),
-        ("franca@email.com", "sergio@email.com")
+        ('madu@email.com', 'paola@email.com'),
+        ('madu@email.com', 'jacquin@email.com'),
+        ('madu@email.com', 'ciclano@email.com'),
+        ('sene@email.com', 'elaine@email.com'),
+        ('fred@email.com', 'adrio@email.com'),
+        ('fred@email.com', 'paulo@email.com'),
+        ('franca@email.com', 'sergio@email.com')
 ;
