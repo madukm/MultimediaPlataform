@@ -80,7 +80,9 @@ INSERT INTO coordenador
         ('elaine@email.com'),
         ('ciclano@email.com'),
         ('sergio@email.com'),
-        ('adrio@email.com');
+        ('adrio@email.com'),
+        ('jacquin@email.com')
+;
 
 INSERT INTO termo
     VALUES
@@ -92,6 +94,10 @@ INSERT INTO termo
         '01-07-2021',
         '30-06-2023',
         'CHEF'),
+        ('jacquin@email.com',
+        '01-06-2024',
+        '01-07-2024',
+        'CHEF'),
         ('sergio@email.com',
         '01-06-2023',
         '01-07-2023',
@@ -99,7 +105,8 @@ INSERT INTO termo
         ('adrio@email.com',
         '04-06-2022',
         '04-11-2022',
-        'FARMACEUTICO');
+        'FARMACEUTICO')
+;
 
 INSERT INTO chef
     VALUES
@@ -111,32 +118,36 @@ INSERT INTO chef
 INSERT INTO faxineiro
     VALUES
         ('felipe@email.com'),
-        ('sergio@email.com');
+        ('sergio@email.com'),
+        ('adrio@email.com');
 ;
 
 INSERT INTO farmaceutico
     VALUES
         ('adrio@email.com'),
-        ('paulo@email.com');
+        ('paulo@email.com'),
+        ('felipe@email.com')
 ;
 
 INSERT INTO professor
     VALUES
         ('elaine@email.com'),
-        ('andre@email.com');
+        ('andre@email.com')
+;
 
-<<<<<<< Updated upstream
 INSERT INTO areasAtuacao
     VALUES
         ('elaine@email.com',
         'Base de Dados'),
         ('elaine@email.com',
-        'Ciencia de Dados');
+        'Ciencia de Dados')
+;
 
 INSERT INTO chef
     VALUES 
         ('jacquin@email.com'),
-        ('paola@email.com');
+        ('paola@email.com')
+;
 
 INSERT INTO especialidades
     VALUES 
@@ -145,10 +156,9 @@ INSERT INTO especialidades
         ('paola@email.com',
         'italiana'),
         ('paola@email.com',
-        'argentina');
+        'argentina')
+;
 
-
-=======
 INSERT INTO solicitacao
     VALUES
         ('sene@email.com',
@@ -175,7 +185,8 @@ INSERT INTO solicitacao
         'elaine@email.com',
         '09-09-2023',
         'andre@email.com',
-        'Revisao no material postado.');
+        'Revisao no material postado.')
+;
 
 INSERT INTO tutorial
     VALUES
@@ -211,26 +222,38 @@ INSERT INTO tutorial
         '06-07-2022',
         'Roupa',
         'TECNICALIMPEZA',
-        0),
+        4),
         (DEFAULT,
         'Como lavar o seu banheiro sem desperdicar agua',
         '07-07-2022',
         'Comodo',
         'TECNICALIMPEZA',
         5),
+        (DEFAULT,
+        'Como lavar o seu chao',
+        '10-07-2022',
+        'Comodo',
+        'TECNICALIMPEZA',
+        4),
         -- Assistencia Farmaceutica
         (DEFAULT,
         'O que fazer quando sentir enjoo?',
         '08-07-2022',
         'Saude',
-        'TECNICALIMPEZA',
+        'ASSISTENCIA',
         0),
         (DEFAULT,
         'Quais produtos que ajudam a hidratar a pele?',
         '09-07-2022',
         'Estetica',
-        'TECNICALIMPEZA',
-        5)
+        'ASSISTENCIA',
+        5),
+        (DEFAULT,
+        'QuaL remedio para enxaqueca?',
+        '11-07-2022',
+        'Saude',
+        'ASSISTENCIA',
+        3)
 ;
 
 INSERT INTO receita
@@ -250,13 +273,13 @@ INSERT INTO receita
 INSERT INTO ingredientes
     VALUES
         ((SELECT T.id FROM tutorial T WHERE ( T.titulo = 'Como fazer um macarrão gostoso' AND T.data = '2022-07-02'::date)),
-        "Macarrao espaguete 500g"),
+        'Macarrao espaguete 500g'),
         ((SELECT T.id FROM tutorial T WHERE ( T.titulo = 'Como fazer um macarrão gostoso' AND T.data = '2022-07-02'::date)),
-        "Molho de tomate 240g"),
+        'Molho de tomate 240g'),
         ((SELECT T.id FROM tutorial T WHERE ( T.titulo = 'Como fazer um crepe' AND T.data = '2022-07-03'::date)),
-        "Massa de Crepe"),
+        'Massa de Crepe'),
         ((SELECT T.id FROM tutorial T WHERE ( T.titulo = 'Como fazer um crepe' AND T.data = '2022-07-03'::date)),
-        "Carne Moida 200g")
+        'Carne Moida 200g')
 ;
 
 INSERT INTO videoaula
@@ -286,6 +309,9 @@ INSERT INTO tecnicaLimpeza
         ),
         ((SELECT T.id FROM tutorial T WHERE ( T.titulo = 'Como lavar o seu banheiro sem desperdicar agua' AND T.data = '2022-07-07'::date)),
         'sergio@email.com'
+        ),
+        ((SELECT T.id FROM tutorial T WHERE ( T.titulo = 'Como lavar o seu chao' AND T.data = '2022-07-10'::date)),
+        'adrio@email.com'
         )
 ;
 
@@ -306,6 +332,9 @@ INSERT INTO assistencia
         ),
         ((SELECT T.id FROM tutorial T WHERE ( T.titulo = 'Quais produtos que ajudam a hidratar a pele?' AND T.data = '2022-07-09'::date)),
         'paulo@email.com'
+        ),
+        ((SELECT T.id FROM tutorial T WHERE ( T.titulo = 'QuaL remedio para enxaqueca?' AND T.data = '2022-07-11'::date)),
+        'felipe@email.com'
         )
 ;
 
@@ -318,4 +347,31 @@ INSERT INTO remedios
         'NIVEA Locao Hidratante Milk'
         )
 ;
->>>>>>> Stashed changes
+
+INSERT INTO comentario
+    VALUES
+        ('sene@email.com',
+        (SELECT T.id FROM tutorial T WHERE ( T.titulo = 'Como lavar mancha de suco na roupa' AND T.data = '2022-07-06'::date)),
+        '16-07-2022',
+        'Gostei Bastante.'),
+        ('sene@email.com',
+        (SELECT T.id FROM tutorial T WHERE ( T.titulo = 'Como lavar o seu banheiro sem desperdicar agua' AND T.data = '2022-07-07'::date)),
+        '17-07-2022',
+        'Muito bom!'),
+        ('sene@email.com',
+        (SELECT T.id FROM tutorial T WHERE ( T.titulo = 'Como lavar o seu chao' AND T.data = '2022-07-10'::date)),
+        '16-07-2022',
+        'Podia melhorar.'),
+        ('madu@email.com',
+        (SELECT T.id FROM tutorial T WHERE ( T.titulo = 'Como lavar mancha de suco na roupa' AND T.data = '2022-07-06'::date)),
+        '16-07-2022',
+        'Interessante.'),
+        ('madu@email.com',
+        (SELECT T.id FROM tutorial T WHERE ( T.titulo = 'Como lavar o seu banheiro sem desperdicar agua' AND T.data = '2022-07-07'::date)),
+        '18-07-2022',
+        'Vai ter continuacao?'),
+        ('madu@email.com',
+        (SELECT T.id FROM tutorial T WHERE ( T.titulo = 'O que fazer quando sentir enjoo?' AND T.data = '2022-07-08'::date)),
+        '19-07-2022',
+        'Achei meio sem sal.')
+;

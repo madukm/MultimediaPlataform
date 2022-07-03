@@ -44,28 +44,32 @@ SELECT M.nome, M.telefone
     FROM mestre M
         JOIN termo T
         ON M.email = T.coordenador
-    WHERE (DATEDIFF(DAY,T.iniVigencia,T.fimVigencia)/30 && (T.classe == "PROFESSOR" || T.classe == "CHEF"))
-
+    WHERE ((T.fimVigencia - T.iniVigencia)/30 <= 6 AND (T.classe = 'PROFESSOR' OR T.classe = 'CHEF'))
 ;
 -- Consultar todas as Tecnicas de Limpeza de faxineiros que
 -- também são farmaceuticos(listar nome e nota média,
 -- seguido de uma ordenação decrescente);
 
--- (Média por classe)
 
-SELECT M.nome, AVG(T.nota) as Media_1, AVG(T2.nota) as Media_2
+SELECT M.nome, AVG(T1.nota) as Media_Faxina, AVG(T2.nota) as Media_Assistencia
     FROM mestre M
-        JOIN 
-            (tecnicaLimpeza T1
-            JOIN assistencia T2
-            ON T1.faxineiro = T2.farmaceutico
-            )
-        ON T1.faxineiro = M.email
+        JOIN tecnicaLimpeza TL
+		ON TL.faxineiro = M.email
+		
+        JOIN assistencia ASSIS
+        ON TL.faxineiro = ASSIS.farmaceutico
+		
+		JOIN tutorial T1
+		ON T1.id = TL.tutorial
+		
+		JOIN tutorial T2
+		ON T2.id = ASSIS.tutorial
+					
     GROUP BY (M.nome)
-    ORDER BY AVG(T1.nota) DESC,AVG(T2.nota) DESC
+    ORDER BY AVG(T1.nota) DESC, AVG(T2.nota) DESC
 ;
 
--- Selecionar quais universitários fizeram mais de 3
+-- Selecionar quais universitários fizeram mais de 2
 -- comentários em tutoriais de faxina;
 
 SELECT U.nome,COUNT(Cm.data) as Quantidade_Comentários
@@ -75,5 +79,5 @@ SELECT U.nome,COUNT(Cm.data) as Quantidade_Comentários
             JOIN tecnicaLimpeza Tl
             ON Cm.tutorial = Tl.tutorial
     GROUP BY (U.nome)
-    HAVING COUNT(Cm.data)>3
+    HAVING COUNT(Cm.data)>2
 ;
