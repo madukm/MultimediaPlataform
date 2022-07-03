@@ -1,75 +1,69 @@
-import db
+from database import Postgres
 
-def format_line(index, words):
-    ret = ''
-    length = 50
-    for i in range(len(index)):
-        string = str(index[i])+'- '+ words[i]
-        for x in range(length - len(string)):
-            string+=(" ")
-        ret+=string
+db = None
 
-    return ret
-        
-"""Funcao que organiza e imprime itens de uma query"""
-def print_format_line(elements):
-    words = []
-    index = []
-    for i in range(len(elements)):
-        words.append(elements[i])
-        index.append(i)
-        if (i+1)%3 == 0:
-            print(format_line(index, words))
-            words = []
-            index = []
-    print(format_line(index, words))
-    words = []
-    index = []
+query = {
+    'mestre': """INSERT INTO mestre(email, nome, data_nasc, telefone) VALUES(%s,%s,%s,%s);""",
+    'coordenador': """SELECT nome FROM coordenador WHERE classe = %s""",
+    'universitario': """SELECT nome FROM universitario WHERE email = %s""",
+    'solicitacao': """INSERT INTO solicitacao(universitario, coordenador, solicitacao) VALUES(%s, %s, %s);"""  
+}
 
-print("""
-BEM VINDO(A) à plataforma de tutoriais para apoio a universitários!!!
-""")
-
-while True:
-    func = int(input("""Selecione uma funcionalidade:   
-    1 - CADASTRAR MESTRE
-    2 - FAZER UMA SOLICITAÇÃO
-    3 - RECOMENDAR UM TUTORIAL A OUTRO UNIVERSITÁRIO
-    4 - SAIR DO SISTEMA
-    """))
-    print("\n")
+def login(mestre):
+    while(True):
+        email = input("""Informe seu email: """)
+        if not mestre: # Universitario
+            name = db.query(query['universitario'], (email,))
+            if name != None:
+                print(f"Bem vindo(a) de volta {name[0]}!\n")
+                return (email, name)
+            else:
+                print("Este email não está cadastrado. Tente novamente!\n")
 
 
-    if func == 1: 
-        email = input("Informe seu email:")
-        nome = input("Informe seu nome:")
-        data_nascimento = input("Informe sua data de nascimento (dd-mm-aaaa):")
-        telefone = input("Informe seu telefone:")
-
-        if db.inserir_mestre(email, nome, data_nascimento, telefone):
-            print(f"O mestre {nome} ({email}) foi adicionado ao banco.")
-        print('\n')
-
-    elif func == 2:
-        email_uni = input("""Faça seu login para realizar uma solicitação!
-                            Informe seu email: """)
-        # Checar se o email está cadastrado como universitário no bd
-        classe = int(input("""Sua solicitação é destinada a que classe?
-                            1 - Professor
-                            2 - Chef
-                            3 - Faxineiro
-                            4 - Farmacêutico"""))
-        solicitacao = input("""Qual solicitação você deseja enviar? Por favor, escreva em até 200 caracteres.""")
-        # Erro caso não haja um coordenador atualmente da classe
-        if db.cadastrar_solicitacao(email_uni, classe, solicitacao):
-            print(f"Sua solicitação foi cadastrada!\n")    
-
-    elif func == 3: # Recomendar tutorial
-        pass
-
-    elif func == 4: # Sair do sistema
-        print("Saindo... \n")
-        break
+if __name__ == "__main__":
     
-    else:
-        print("Função inválida!\n")
+    db = Postgres()
+
+    print("""
+    BEM VINDO(A) à plataforma de tutoriais para apoio a universitários!!!
+    """)
+
+    while True:
+        func = int(input(
+"""Selecione uma funcionalidade:   
+    1 - FAZER UMA SOLICITAÇÃO
+    2 - BUSCAR O NOME
+    3 - SAIR DO SISTEMA
+"""))
+
+        if func == 1:
+            print("Faça seu login para realizar uma solicitação!")
+            # Checking if the email is on the db
+            email, nome = login(False)
+            classe = int(input(
+"""Sua solicitação é destinada a que classe?
+    1 - Professor
+    2 - Chef
+    3 - Faxineiro
+    4 - Farmacêutico
+"""))
+            solicitacao = input("Qual solicitação você deseja enviar? Por favor, escreva em até 200 caracteres.\n")
+            # Erro caso não haja um coordenador da classe em vigência
+            if not db.query(query["coordenador"], (classe,)):
+                print("Não é possível enviar solicitações no momento. Por favor, tente mais tarde.\n")
+                continue
+            if db.query(query["solicitacao"], (uni, classe, solicitacao)):
+                print("Sua solicitação foi cadastrada!\n")
+
+        elif func == 2: # Atribuir uma solicitação ao mestre com menos solicitações
+            print("Faça seu login para recomendar um tutorial!\n")
+            uni = login(False)
+            
+        elif func == 3: # Sair do sistema
+            del db
+            print("Saindo... \n")
+            break
+        
+        else:
+            print("Função inválida!\n")
