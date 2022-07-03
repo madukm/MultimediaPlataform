@@ -311,3 +311,37 @@ INSERT INTO remedios
         'NIVEA Locao Hidratante Milk'
         )
 ;
+
+INSERT INTO comentario
+    VALUES 
+        ("madu@email.com", 4, '01/02/2021', 'Exelente tutorial!'),
+        ("fred@email.com", 1, '11/07/2020', 'Otimo video!'),
+        ("sene@email.com", 2, '21/04/2022', 'Gostei')
+;
+
+INSERT INTO recomendar
+    VALUES
+        ("madu@email.com", "franca@email.com", 1),
+        ("madu@email.com", "fred@email.com", 2),
+        ("madu@email.com", "sene@email.com", 2),
+        ("beatriz@email.com", "madu@email.com", 3)
+;
+
+INSERT INTO avaliar
+    VALUES
+        (4, "madu@email.com", 10),
+        (1, "fred@email.com", 9),
+        (2, "sene@email.com", 7),
+        (3, "sene@email.com", 8)
+;
+
+INSERT INTO seguir
+    VALUES
+        ("madu@email.com", "paola@email.com"),
+        ("madu@email.com", "jaquin@email.com"),
+        ("madu@email.com", "ciclano@email.com"),
+        ("sene@email.com", "elaine@email.com"),
+        ("fred@email.com", "adrio@email.com"),
+        ("fred@email.com", "paulo@email.com"),
+        ("franca@email.com", "sergio@email.com")
+;

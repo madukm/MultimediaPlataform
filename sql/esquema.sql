@@ -153,7 +153,7 @@ CREATE TABLE tutorial(
 
 -- Video aula
 CREATE TABLE videoaula(
-    tutorial INTEGER NOT NULL,
+    tutorial SERIAL NOT NULL,
     assunto VARCHAR(100),
     disciplina VARCHAR(100),
     professor VARCHAR(50) NOT NULL,
@@ -168,7 +168,7 @@ CREATE TABLE videoaula(
 
 -- Materias da video aula
 CREATE TABLE materiais(
-    videoaula INTEGER NOT NULL,
+    videoaula SERIAL NOT NULL,
     material VARCHAR(100) NOT NULL,
     CONSTRAINT pk_materiais PRIMARY KEY(videoaula, material),
     CONSTRAINT fk_materiais FOREIGN KEY(videoaula)
@@ -178,7 +178,7 @@ CREATE TABLE materiais(
 
 -- Receita
 CREATE TABLE receita(
-    tutorial INTEGER NOT NULL,
+    tutorial SERIAL NOT NULL,
     numPorcoes INTEGER CHECK(numPorcoes > 0),
     calorias INTEGER CHECK(calorias > 0),
     chef VARCHAR(50) NOT NULL,
@@ -193,7 +193,7 @@ CREATE TABLE receita(
 
 -- Ingredientes da receita
 CREATE TABLE ingredientes(
-    receita INTEGER NOT NULL,
+    receita SERIAL NOT NULL,
     ingrediente VARCHAR(100) NOT NULL,
     CONSTRAINT pk_ingredientes PRIMARY KEY(receita, ingrediente),
     CONSTRAINT fk_ingredientes FOREIGN KEY(receita)
@@ -203,7 +203,7 @@ CREATE TABLE ingredientes(
 
 -- Tecnica de Limpeza
 CREATE TABLE tecnicaLimpeza(
-    tutorial INTEGER NOT NULL,
+    tutorial SERIAL NOT NULL,
     faxineiro VARCHAR(50) NOT NULL,
     CONSTRAINT pk_tecnicaLimpeza PRIMARY KEY(tutorial),
     CONSTRAINT fk_tecnicaLimpeza_tutorial FOREIGN KEY(tutorial)
@@ -216,7 +216,7 @@ CREATE TABLE tecnicaLimpeza(
 
 -- Lista de produtos para limpeza
 CREATE TABLE produtos(
-    tecnicaLimpeza INTEGER NOT NULL,
+    tecnicaLimpeza SERIAL NOT NULL,
     produto VARCHAR(100) NOT NULL,
     CONSTRAINT pk_produtos PRIMARY KEY(tecnicaLimpeza, produto),
     CONSTRAINT fk_produtos FOREIGN KEY(tecnicaLimpeza)
@@ -226,7 +226,7 @@ CREATE TABLE produtos(
 
 -- Assistencia
 CREATE TABLE assistencia(
-    tutorial INTEGER NOT NULL,
+    tutorial SERIAL NOT NULL,
     farmaceutico VARCHAR(50) NOT NULL,
     CONSTRAINT pk_assistencia PRIMARY KEY(tutorial),
     CONSTRAINT fk_assistencia_tutorial FOREIGN KEY(tutorial)
@@ -239,7 +239,7 @@ CREATE TABLE assistencia(
 
 -- Lista de remedios
 CREATE TABLE remedios(
-    assistencia INTEGER NOT NULL,
+    assistencia SERIAL NOT NULL,
     remedio VARCHAR(100) NOT NULL,
     CONSTRAINT pk_remedios PRIMARY KEY(assistencia, remedio),
     CONSTRAINT fk_remedios FOREIGN KEY(assistencia)
@@ -262,7 +262,7 @@ CREATE TABLE seguir(
 
 -- Avaliar
 CREATE TABLE avaliar(
-    tutorial INTEGER NOT NULL,
+    tutorial SERIAL NOT NULL,
     universitario VARCHAR(50) NOT NULL,
     nota INTEGER NOT NULL,
     CONSTRAINT pk_avaliar PRIMARY KEY(tutorial, universitario),
@@ -279,7 +279,7 @@ CREATE TABLE avaliar(
 CREATE TABLE recomendar(
     recomenda VARCHAR(50) NOT NULL,
     recebe VARCHAR(50) NOT NULL,
-    tutorial INTEGER NOT NULL,
+    tutorial SERIAL NOT NULL,
     CONSTRAINT pk_recomendar PRIMARY KEY(recomenda, recebe, tutorial),
     CONSTRAINT fk_recomendar_recomenda FOREIGN KEY(recomenda)
         REFERENCES universitario(email)
@@ -295,7 +295,7 @@ CREATE TABLE recomendar(
 -- Comentario
 CREATE TABLE comentario(
     universitario VARCHAR(50) NOT NULL,
-    tutorial INTEGER NOT NULL,
+    tutorial SERIAL NOT NULL,
     data TIMESTAMP NOT NULL,
     texto VARCHAR(200) NOT NULL,
     CONSTRAINT pk_comentario PRIMARY KEY(universitario, tutorial, data),
