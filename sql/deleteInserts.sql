@@ -1,3 +1,5 @@
+-- Use for DEBUG to delete the rows and reinsert data in the tables
+
 DELETE FROM mestre;
 
 DELETE FROM universitario;
@@ -33,3 +35,5 @@ DELETE FROM produtos;
 DELETE FROM assistencia;
 
 DELETE FROM remedios;
+
+DELETE FROM comentario;
