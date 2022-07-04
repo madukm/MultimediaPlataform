@@ -1,3 +1,5 @@
+--Inserção de dados para alimentar a base de dados
+
 INSERT INTO mestre
     VALUES (
         -- Professores
@@ -119,6 +121,7 @@ INSERT INTO faxineiro
     VALUES
         ('felipe@email.com'),
         ('sergio@email.com'),
+        ('beltrano@email.com'),
         ('adrio@email.com');
 ;
 
@@ -374,4 +377,64 @@ INSERT INTO comentario
         (SELECT T.id FROM tutorial T WHERE ( T.titulo = 'O que fazer quando sentir enjoo?' AND T.data = '2022-07-08'::date)),
         '19-07-2022',
         'Achei meio sem sal.')
+;
+
+INSERT INTO classes
+    VALUES(
+        -- Professores
+        'elaine@email.com',
+        'PROFESSOR'
+        ),
+        ('andre@email.com',
+        'PROFESSOR'
+        ),
+        -- Chefs
+        ('ciclano@email.com',
+        'CHEF'
+        ),
+        ('jacquin@email.com',
+        'CHEF'
+        ),
+        ('paola@email.com',
+        'CHEF'
+        ),
+        -- Faxineiros
+        ('sergio@email.com',
+        'FAXINEIRO'
+        ),
+        ('beltrano@email.com',
+        'FAXINEIRO'
+        ),
+        ('felipe@email.com',
+        'FAXINEIRO'
+        ),
+        ('adrio@email.com',
+        'FAXINEIRO'
+        ),
+        -- Farmaceuticos
+        ('adrio@email.com',
+        'FARMACEUTICO'
+        ),
+        ('paulo@email.com',
+        'FARMACEUTICO'
+        )
+        ('felipe@email.com',
+        'FARMACEUTICO'
+        )
+        -- Coordenadores
+        ('elaine@email.com',
+        'COORDENADOR'
+        ),
+        ('ciclano@email.com',
+        'COORDENADOR'
+        ),
+        ('sergio@email.com',
+        'COORDENADOR'
+        ),
+        ('adrio@email.com',
+        'COORDENADOR'
+        ),
+        ('jacquin@email.com',
+        'COORDENADOR'
+        )
 ;

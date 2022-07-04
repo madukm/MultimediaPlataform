@@ -1,7 +1,8 @@
+-- Consultas realizadas na base de dados
 
 -- Selecionar o texto de uma solicitação realizada a um tal
 -- coordenador 'X' que era coordenador durante um período de
--- vigência Y-Z. Ordene por data;
+-- vigência 16/12/2021 - 01/01/2025, ordenados pela data;
 
 SELECT S.texto,S.data,C.mestre
 	FROM solicitacao S
@@ -13,7 +14,7 @@ SELECT S.texto,S.data,C.mestre
     ORDER BY S.data
 ;
 
--- Listar todos os mestres que possuem os tutoriais com 
+-- Listar todos os mestres que possuem algum tutorial com 
 -- nota menor ou igual a 3 (nome e dataNasc) de forma
 -- ordenada (pelo nome do mestre);
 
@@ -46,6 +47,7 @@ SELECT M.nome, M.telefone
         ON M.email = T.coordenador
     WHERE ((T.fimVigencia - T.iniVigencia)/30 <= 6 AND (T.classe = 'PROFESSOR' OR T.classe = 'CHEF'))
 ;
+
 -- Consultar todas as Tecnicas de Limpeza de faxineiros que
 -- também são farmaceuticos(listar nome e nota média,
 -- seguido de uma ordenação decrescente);
@@ -72,7 +74,7 @@ SELECT M.nome, AVG(T1.nota) as Media_Faxina, AVG(T2.nota) as Media_Assistencia
 -- Selecionar quais universitários fizeram mais de 2
 -- comentários em tutoriais de faxina;
 
-SELECT U.nome,COUNT(Cm.data) as Quantidade_Comentários
+SELECT U.nome,COUNT(Cm.data) as Quantidade_Comentarios
     FROM universitario U 
         JOIN comentario Cm 
         ON U.email = Cm.universitario
