@@ -31,8 +31,7 @@ class Postgres():
 
     def query(self, query, params=None):
         try:
-            self.cur.execute(query, params)
-            result = self.cur.fetchone()
+            result = self.cur.execute(query, params)
         except Exception as error:
             #print('Error executing query "{}", error: {}'.format(query, error))
             return None
